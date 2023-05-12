@@ -16,6 +16,7 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 
 // Зебра
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -72,11 +73,74 @@ function BootstrapDialogTitle(props) {
     </DialogTitle>
   );
 }
+// Dialog
 
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
+
+// Skeleton
+function Animations() {
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+        <TableContainer sx={{ maxHeight: 660 }}>
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+          >
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="left">ID</StyledTableCell>
+                <StyledTableCell align="left">Name</StyledTableCell>
+                <StyledTableCell align="right">Status</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <StyledTableRow>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+              </StyledTableRow>
+              <StyledTableRow>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+              </StyledTableRow>
+              <StyledTableRow>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Skeleton animation="wave" />
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper >
+    </Box >
+  );
+}
+// Skeleton
 
 const EnhancedTable = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -96,10 +160,15 @@ const EnhancedTable = (props) => {
 
   return (
     <>
+    <Animations />
+    {!props.page ?
+      <Animations /> :
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ width: '100%', mb: 2 }}>
-          <TableContainer>
+        <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 660 }}>
             <Table
+              stickyHeader
+              aria-label="sticky table"
               sx={{ minWidth: 750 }}
               aria-labelledby="tableTitle"
             >
@@ -114,13 +183,31 @@ const EnhancedTable = (props) => {
                 {props.data?.results &&
                   props.data.results.map((row, hero) => (
                     <>
-                      <StyledTableRow key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
+                      <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
                         <StyledTableCell component="th" scope="row">
                           {row.id}
                         </StyledTableCell>
                         <StyledTableCell align="left">{row.name}</StyledTableCell>
                         <StyledTableCell align="right">{row.status}</StyledTableCell>
                       </StyledTableRow>
+                      {/* <StyledTableRow>
+                        <StyledTableCell>
+                          <Skeleton animation="wave" />
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <Skeleton animation="wave" />
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <Skeleton animation="wave" />
+                        </StyledTableCell>
+                      </StyledTableRow> */}
+                      {/* <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.id}
+                        </StyledTableCell>
+                        <StyledTableCell align="left">{row.name}</StyledTableCell>
+                        <StyledTableCell align="right">{row.status}</StyledTableCell>
+                      </StyledTableRow> */}
 
                       <BootstrapDialog
                         key={`hero-key${selectedHero.id}`}
@@ -155,7 +242,7 @@ const EnhancedTable = (props) => {
             onPageChange={props.onPageChange}
           />
         </Paper >
-      </Box >
+      </Box >}
     </>
   )
 }

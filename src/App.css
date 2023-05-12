@@ -1,6 +1,9 @@
+body {
+  background: #e9edf996;
+}
+
 .App {
   margin: auto;
-  background: #e9edf996;
   color: #92a4b1;
 }
 

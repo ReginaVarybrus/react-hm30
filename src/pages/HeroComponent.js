@@ -16,13 +16,14 @@ const HttpHeroComponent = () => {
     const heroes = useSelector((state) => state.rickmorty.listOfChar)
     const isLoading = useSelector((state) => state.rickmorty.isLoading)
     const error = useSelector((state) => state.rickmorty.error)
- 
+
     useEffect(() => {
         dispatch(fetchCharacter(`character?page=${offSet / 20 + 1}`))
-    }, [dispatch])
+    }, [dispatch, page])
 
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+        setTimeout(() => setPage(newPage), 1000);
+        setTimeout(() => console.log('change page'), 1000)
     };
 
     if (error) {
@@ -34,7 +35,9 @@ const HttpHeroComponent = () => {
             {isLoading ?
                 <Box sx={{ display: 'flex' }}>
                     <CircularProgress />
-                </Box> :
+                </Box>
+                // <Animations />
+                 :
                 <EnhancedTable
                     data={heroes}
                     count={heroes.info?.count}
