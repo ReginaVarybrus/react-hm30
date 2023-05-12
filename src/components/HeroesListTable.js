@@ -122,17 +122,7 @@ function Animations() {
                   <Skeleton animation="wave" />
                 </StyledTableCell>
               </StyledTableRow>
-              <StyledTableRow>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-              </StyledTableRow>
+              
             </TableBody>
           </Table>
         </TableContainer>
@@ -161,7 +151,7 @@ const EnhancedTable = (props) => {
   return (
     <>
     <Animations />
-    {!props.page ?
+    {!props.data ?
       <Animations /> :
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
