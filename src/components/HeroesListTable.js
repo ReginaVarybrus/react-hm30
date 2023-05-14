@@ -83,8 +83,8 @@ BootstrapDialogTitle.propTypes = {
 // Skeleton
 function Animations() {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+    <Box sx={{ width: 750, margin: 'auto' }}>
+      <Paper sx={{ mb: 2, overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 660 }}>
           <Table
             stickyHeader
@@ -122,7 +122,7 @@ function Animations() {
                   <Skeleton animation="wave" />
                 </StyledTableCell>
               </StyledTableRow>
-              
+
             </TableBody>
           </Table>
         </TableContainer>
@@ -150,93 +150,71 @@ const EnhancedTable = (props) => {
 
   return (
     <>
-    <Animations />
-    {!props.data ?
-      <Animations /> :
-      <Box sx={{ width: '100%' }}>
-        <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 660 }}>
-            <Table
-              stickyHeader
-              aria-label="sticky table"
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-            >
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="left">ID</StyledTableCell>
-                  <StyledTableCell align="left">Name</StyledTableCell>
-                  <StyledTableCell align="right">Status</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {props.data?.results &&
-                  props.data.results.map((row, hero) => (
-                    <>
-                      <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">{row.name}</StyledTableCell>
-                        <StyledTableCell align="right">{row.status}</StyledTableCell>
-                      </StyledTableRow>
-                      {/* <StyledTableRow>
-                        <StyledTableCell>
-                          <Skeleton animation="wave" />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <Skeleton animation="wave" />
-                        </StyledTableCell>
-                        <StyledTableCell>
-                          <Skeleton animation="wave" />
-                        </StyledTableCell>
-                      </StyledTableRow> */}
-                      {/* <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.id}
-                        </StyledTableCell>
-                        <StyledTableCell align="left">{row.name}</StyledTableCell>
-                        <StyledTableCell align="right">{row.status}</StyledTableCell>
-                      </StyledTableRow> */}
-
-                      <BootstrapDialog
-                        key={`hero-key${selectedHero.id}`}
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                      >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                          {selectedHero.name}
-                        </BootstrapDialogTitle>
-                        <DialogContent dividers>
-                          <Typography gutterBottom>
-                            {selectedHero.status}
-                          </Typography>
-                          <Typography gutterBottom>
-                            {selectedHero.species}
-                          </Typography>
-                          <Box><img src={selectedHero.image}></img></Box>
-                        </DialogContent>
-                      </BootstrapDialog>
-                    </>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[]}
-            component="div"
-            count={props.count}
-            rowsPerPage={props.rowsPerPage}
-            page={props.page}
-            onPageChange={props.onPageChange}
-          />
-        </Paper >
-      </Box >}
+        <Box sx={{ width: '100%' }}>
+          <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+            <TableContainer sx={{ maxHeight: 660 }}>
+              <Table
+                stickyHeader
+                aria-label="sticky table"
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell align="left">ID</StyledTableCell>
+                    <StyledTableCell align="left">Name</StyledTableCell>
+                    <StyledTableCell align="right">Status</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {props.data?.results &&
+                    props.data.results.map((row, hero) => (
+                      <>
+                        <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
+                          <StyledTableCell component="th" scope="row">
+                            {row.id}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">{row.name}</StyledTableCell>
+                          <StyledTableCell align="right">{row.status}</StyledTableCell>
+                        </StyledTableRow>
+                        <BootstrapDialog
+                          key={`hero-key${selectedHero.id}`}
+                          onClose={handleClose}
+                          aria-labelledby="customized-dialog-title"
+                          open={open}
+                        >
+                          <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                            {selectedHero.name}
+                          </BootstrapDialogTitle>
+                          <DialogContent dividers>
+                            <Typography gutterBottom>
+                              {selectedHero.status}
+                            </Typography>
+                            <Typography gutterBottom>
+                              {selectedHero.species}
+                            </Typography>
+                            <Box><img src={selectedHero.image}></img></Box>
+                          </DialogContent>
+                        </BootstrapDialog>
+                      </>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[]}
+              component="div"
+              count={props.count}
+              rowsPerPage={props.rowsPerPage}
+              page={props.page}
+              onPageChange={props.onPageChange}
+            />
+          </Paper >
+        </Box >
     </>
   )
 }
 
-export default EnhancedTable;
+export { EnhancedTable, Animations };
 
 
