@@ -16,7 +16,6 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import Skeleton from '@mui/material/Skeleton';
 
 // Зебра
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,11 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  }
 }));
 // Зебра
 
@@ -80,58 +75,6 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-// Skeleton
-function Animations() {
-  return (
-    <Box sx={{ width: 750, margin: 'auto' }}>
-      <Paper sx={{ mb: 2, overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 660 }}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-          >
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left">ID</StyledTableCell>
-                <StyledTableCell align="left">Name</StyledTableCell>
-                <StyledTableCell align="right">Status</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <StyledTableRow>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-              </StyledTableRow>
-              <StyledTableRow>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Skeleton animation="wave" />
-                </StyledTableCell>
-              </StyledTableRow>
-
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper >
-    </Box >
-  );
-}
-// Skeleton
-
 const EnhancedTable = (props) => {
   const [open, setOpen] = React.useState(false);
   const [selectedHero, setSelectedHero] = React.useState('');
@@ -142,79 +85,79 @@ const EnhancedTable = (props) => {
     setOpen(true);
   };
 
-  console.log('hero', selectedHero)
-
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <>
-        <Box sx={{ width: '100%' }}>
-          <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 660 }}>
-              <Table
-                stickyHeader
-                aria-label="sticky table"
-                sx={{ minWidth: 750 }}
-                aria-labelledby="tableTitle"
-              >
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align="left">ID</StyledTableCell>
-                    <StyledTableCell align="left">Name</StyledTableCell>
-                    <StyledTableCell align="right">Status</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {props.data?.results &&
-                    props.data.results.map((row, hero) => (
-                      <>
-                        <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
-                          <StyledTableCell component="th" scope="row">
-                            {row.id}
-                          </StyledTableCell>
-                          <StyledTableCell align="left">{row.name}</StyledTableCell>
-                          <StyledTableCell align="right">{row.status}</StyledTableCell>
-                        </StyledTableRow>
-                        <BootstrapDialog
-                          key={`hero-key${selectedHero.id}`}
-                          onClose={handleClose}
-                          aria-labelledby="customized-dialog-title"
-                          open={open}
-                        >
-                          <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                            {selectedHero.name}
-                          </BootstrapDialogTitle>
-                          <DialogContent dividers>
-                            <Typography gutterBottom>
-                              {selectedHero.status}
-                            </Typography>
-                            <Typography gutterBottom>
-                              {selectedHero.species}
-                            </Typography>
-                            <Box><img src={selectedHero.image}></img></Box>
-                          </DialogContent>
-                        </BootstrapDialog>
-                      </>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[]}
-              component="div"
-              count={props.count}
-              rowsPerPage={props.rowsPerPage}
-              page={props.page}
-              onPageChange={props.onPageChange}
-            />
-          </Paper >
-        </Box >
+      <Box sx={{ width: '100%' }}>
+        <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 660 }}>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+            >
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell sx={{ width: 90 }} align="left">ID</StyledTableCell>
+                  <StyledTableCell align="left">Name</StyledTableCell>
+                  <StyledTableCell align="right">Status</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {props.data?.results &&
+                  props.data.results.map((row, hero) => (
+                    <>
+                      <StyledTableRow hover role="checkbox" key={`row-key${row.id}`} onClick={() => handleClickOpen(row.id)}>
+                        <StyledTableCell sx={{ width: 90 }} component="th" scope="row">
+                          {row.id}
+                        </StyledTableCell>
+                        <StyledTableCell align="left">{row.name}</StyledTableCell>
+                        <StyledTableCell align="right">{row.status}</StyledTableCell>
+                      </StyledTableRow>
+                      <BootstrapDialog
+                        key={`hero-key${selectedHero.id}`}
+                        onClose={handleClose}
+                        aria-labelledby="customized-dialog-title"
+                        open={open}
+                      >
+                        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                          {selectedHero.name}
+                        </BootstrapDialogTitle>
+                        <DialogContent dividers>
+                          <Typography gutterBottom>
+                            {selectedHero.status}
+                          </Typography>
+                          <Typography gutterBottom>
+                            {selectedHero.species}
+                          </Typography>
+                          <Box><img src={selectedHero.image}></img></Box>
+                        </DialogContent>
+                      </BootstrapDialog>
+                    </>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[]}
+            component="div"
+            count={props.count}
+            rowsPerPage={props.rowsPerPage}
+            page={props.page}
+            onPageChange={props.onPageChange}
+          />
+        </Paper >
+      </Box >
     </>
   )
 }
 
-export { EnhancedTable, Animations };
+export default EnhancedTable;
+
+
 
 
